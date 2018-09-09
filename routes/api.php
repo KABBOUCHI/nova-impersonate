@@ -21,15 +21,18 @@ Route::get('users/{user}', function (Request $request, User $user) {
 	$manager->take(auth()->user(), $user);
 
 	return redirect()->to('/');
-})->middleware(['web', 'nova']);
+})->middleware(['nova']);
 
 Route::get('leave', function (Request $request, User $user) {
+
 	$manager = app()->make(ImpersonateManager::class);
 
 	if ($manager->isImpersonating()) {
 		$manager->leave();
+		$manager->clear();
+		session()->flush();
 		return redirect()->to(config('nova.path'));
 	}
 
 	return redirect()->to('/');
-})->middleware(['web', 'auth']);
+})->middleware(['auth']);

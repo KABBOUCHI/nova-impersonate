@@ -2,9 +2,7 @@
 
 namespace KABBOUCHI\NovaImpersonate\Http\Middleware;
 
-use KABBOUCHI\NovaImpersonate\Impersonate;
-
-class Authorize
+class Impersonate
 {
     /**
      * Handle the incoming request.
@@ -15,6 +13,12 @@ class Authorize
      */
     public function handle($request, $next)
     {
-        return  $next($request);
+
+		$response = $next($request);
+
+		dd(session()->all());
+//		dd($response);
+
+        return $response;
     }
 }

@@ -2,54 +2,63 @@
 
 namespace KABBOUCHI\NovaImpersonate;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use KABBOUCHI\NovaImpersonate\Http\Middleware\Authorize;
+use Lab404\Impersonate\Services\ImpersonateManager;
+use Laravel\Nova\Events\ServingNova;
+use Laravel\Nova\Nova;
 
 class ToolServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
+	/**
+	 * Bootstrap any application services.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		$this->loadViewsFrom(__DIR__ . '/../resources/views', 'NovaImpersonate');
 
-        $this->app->booted(function () {
-            $this->routes();
-        });
+		$this->app->booted(function () {
+			$this->routes();
+		});
 
-        Nova::serving(function (ServingNova $event) {
-            //
-        });
-    }
+		Nova::serving(function (ServingNova $event) {
+			//
+		});
+	}
 
-    /**
-     * Register the tool's routes.
-     *
-     * @return void
-     */
-    protected function routes()
-    {
-        if ($this->app->routesAreCached()) {
-            return;
-        }
+	/**
+	 * Register the tool's routes.
+	 *
+	 * @return void
+	 */
+	protected function routes()
+	{
 
-        Route::middleware([])
-                ->prefix('nova-impersonate')
-                ->group(__DIR__.'/../routes/api.php');
-    }
+		if ($this->app->routesAreCached()) {
+			return;
+		}
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
+		Route::middleware(['web'])
+			->prefix('nova-impersonate')
+			->group(__DIR__ . '/../routes/api.php');
+
+	}
+
+	/**
+	 * Register any application services.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
+//		/** @var ImpersonateManager $manager */
+//		$manager = app()->make(ImpersonateManager::class);
+//
+//		if ($manager->isImpersonating() && auth()->id() != $manager->getImpersonatorId()) {
+//			$this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(\KABBOUCHI\NovaImpersonate\Http\Middleware\Impersonate::class);
+//		}
+	}
+
 }
