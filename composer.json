@@ -1,0 +1,30 @@
+{
+    "name": "kabbouchi/nova-impersonate",
+    "description": "A Laravel Nova tool.",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0",
+        "lab404/laravel-impersonate": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "KABBOUCHI\\NovaImpersonate\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KABBOUCHI\\NovaImpersonate\\ToolServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
