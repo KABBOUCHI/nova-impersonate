@@ -1,6 +1,6 @@
 {
     "name": "kabbouchi/nova-impersonate",
-    "description": "A Laravel Nova tool.",
+    "description": "A Laravel Nova field allows you to authenticate as your users.",
     "keywords": [
         "laravel",
         "nova"
