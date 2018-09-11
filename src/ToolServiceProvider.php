@@ -20,6 +20,7 @@ class ToolServiceProvider extends ServiceProvider
 		$this->loadViewsFrom(__DIR__ . '/../resources/views', 'NovaImpersonate');
 
 		$this->app->booted(function () {
+			$this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(\KABBOUCHI\NovaImpersonate\Http\Middleware\Impersonate::class);
 			$this->routes();
 		});
 
@@ -44,21 +45,6 @@ class ToolServiceProvider extends ServiceProvider
 			->prefix('nova-impersonate')
 			->group(__DIR__ . '/../routes/api.php');
 
-	}
-
-	/**
-	 * Register any application services.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-//		/** @var ImpersonateManager $manager */
-//		$manager = app()->make(ImpersonateManager::class);
-//
-//		if ($manager->isImpersonating() && auth()->id() != $manager->getImpersonatorId()) {
-//			$this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(\KABBOUCHI\NovaImpersonate\Http\Middleware\Impersonate::class);
-//		}
 	}
 
 }

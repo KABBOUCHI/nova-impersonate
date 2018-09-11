@@ -19,8 +19,7 @@ class Impersonate extends Text
 </a > ';
 		}, null);
 
-		$this->onlyOnIndex();
-		$this->showOnDetail = true;
+		$this->exceptOnForms();
 		$this->asHtml();
 
 

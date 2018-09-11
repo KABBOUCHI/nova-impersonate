@@ -29,8 +29,6 @@ Route::get('leave', function (Request $request, User $user) {
 
 	if ($manager->isImpersonating()) {
 		$manager->leave();
-		$manager->clear();
-		session()->flush();
 		return redirect()->to(config('nova.path'));
 	}
 

@@ -2,23 +2,37 @@
 
 namespace KABBOUCHI\NovaImpersonate\Http\Middleware;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Lab404\Impersonate\Services\ImpersonateManager;
+
 class Impersonate
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return \Illuminate\Http\Response
-     */
-    public function handle($request, $next)
-    {
+	/**
+	 * Handle the incoming request.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param  \Closure $next
+	 * @return \Illuminate\Http\Response
+	 */
+	public function handle($request, $next)
+	{
 
 		$response = $next($request);
 
-		dd(session()->all());
-//		dd($response);
+		/** @var ImpersonateManager $manager */
+		$manager = app()->make(ImpersonateManager::class);
 
-        return $response;
-    }
+		if ($manager->isImpersonating() && !($response instanceof RedirectResponse)) {
+
+			/** @var Response $response * */
+			$content = $response->getContent();
+
+			$content .= view('NovaImpersonate::reverse')->render();
+
+			$response->setContent($content);
+		}
+
+		return $response;
+	}
 }
