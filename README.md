@@ -6,6 +6,9 @@
 
 This field allows you to authenticate as your users.
 
+![screenshot1](https://raw.githubusercontent.com/KABBOUCHI/nova-impersonate/master/docs/screenshot1.png)
+![screenshot2](https://raw.githubusercontent.com/KABBOUCHI/nova-impersonate/master/docs/screenshot2.png)
+
 Behind the scenes [404labfr/laravel-impersonate](https://github.com/404labfr/laravel-impersonate) is used.
 
 ## Installation
