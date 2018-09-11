@@ -23,15 +23,15 @@ class Impersonate
 		/** @var ImpersonateManager $manager */
 		$manager = app()->make(ImpersonateManager::class);
 
-		if ($manager->isImpersonating() && !($response instanceof RedirectResponse) && $request->acceptsHtml()) {
+		if ($manager->isImpersonating() && !($response instanceof RedirectResponse) && $request->acceptsHtml() && !$request->wantsJson()) {
 
-			/** @var Response $response * */
-			$content = $response->getContent();
+		/** @var Response $response * */
+		$content = $response->getContent();
 
-			$content .= view('NovaImpersonate::reverse')->render();
+		$content .= view('NovaImpersonate::reverse')->render();
 
-			$response->setContent($content);
-		}
+		$response->setContent($content);
+	}
 
 		return $response;
 	}
