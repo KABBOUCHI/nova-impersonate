@@ -6,8 +6,9 @@
 
 This field allows you to authenticate as your users.
 
-![screenshot1](https://raw.githubusercontent.com/KABBOUCHI/nova-impersonate/master/docs/screenshot1.png)
-![screenshot2](https://raw.githubusercontent.com/KABBOUCHI/nova-impersonate/master/docs/screenshot2.png)
+![screenshot1](https://raw.githubusercontent.com/KABBOUCHI/nova-impersonate/master/docs/screenshot1.png?1)
+![screenshot2](https://raw.githubusercontent.com/KABBOUCHI/nova-impersonate/master/docs/screenshot2.png?1)
+![screenshot2](https://raw.githubusercontent.com/KABBOUCHI/nova-impersonate/master/docs/screenshot3.png?1)
 
 Behind the scenes [404labfr/laravel-impersonate](https://github.com/404labfr/laravel-impersonate) is used.
 
@@ -58,7 +59,17 @@ class User extends Resource
 				->creationRules('required', 'string', 'min:6')
 				->updateRules('nullable', 'string', 'min:6'),
 
+
 			Impersonate::make($this->id),  // <---
+			
+			// or
+			Impersonate::make()->withMeta([ 'id' => $this->id  ]),
+			
+			// or
+			Impersonate::make()->withMeta([
+			    'id' => $this->id,
+			    'hideText' => false,
+			]),
 
 		];
 	}
