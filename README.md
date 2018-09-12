@@ -17,6 +17,7 @@ You can install the package in to a Laravel app that uses [Nova](https://nova.la
 
 ```bash
 composer require kabbouchi/nova-impersonate
+php artisan vendor:publish --tag=nova-impersonate-views
 ```
 
 ## Usage
@@ -65,6 +66,8 @@ class User extends Resource
     ...
 }
 ```
+
+
 
 ## Credits
 
