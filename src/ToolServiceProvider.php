@@ -18,6 +18,8 @@ class ToolServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		$this->loadViewsFrom(__DIR__ . '/../resources/views', 'NovaImpersonate');
+		$this->publishes([ __DIR__ . '/../resources/views' => base_path('resources/views/vendor/nova-impersonate'),
+		], 'nova-impersonate-views');
 
 		$this->app->booted(function () {
 			$this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(\KABBOUCHI\NovaImpersonate\Http\Middleware\Impersonate::class);
