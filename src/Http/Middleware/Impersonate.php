@@ -28,7 +28,7 @@ class Impersonate
 		/** @var Response $response * */
 		$content = $response->getContent();
 
-		$content .= view('NovaImpersonate::reverse')->render();
+		$content .= view('nova-impersonate::reverse')->render();
 
 		$response->setContent($content);
 	}
