@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Lab404\Impersonate\Services\ImpersonateManager;
+use KABBOUCHI\NovaImpersonate\Http\Controllers\ImpersonateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,26 +14,6 @@ use Lab404\Impersonate\Services\ImpersonateManager;
 |
 */
 
-Route::get('users/{user}', function (Request $request, $user) {
+Route::get('users/{user}', ImpersonateController::class . '@take')->middleware(['nova']);
 
-
-	$manager = app()->make(ImpersonateManager::class);;
-	$user_to_impersonate = $manager->findUserById($user);
-	$manager->take($request->user(), $user_to_impersonate);
-
-	return redirect()->to('/');
-
-})->middleware(['nova']);
-
-Route::get('leave', function () {
-
-	$manager = app()->make(ImpersonateManager::class);
-
-	if ($manager->isImpersonating()) {
-		$manager->leave();
-
-		return redirect()->to(config('nova.path'));
-	}
-
-	return redirect()->to('/');
-})->middleware(['auth']);
+Route::get('leave', ImpersonateController::class . '@leave')->middleware(['auth']);
