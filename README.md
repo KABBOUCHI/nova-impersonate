@@ -70,6 +70,12 @@ class User extends Resource
 			    'id' => $this->id,
 			    'hideText' => false,
 			]),
+			
+			// or
+			Impersonate::make()->withMeta([
+			    'id' => $this->id,
+			    'redirect_to' => '/custom-redirect-url'
+			]),
 
 		];
 	}

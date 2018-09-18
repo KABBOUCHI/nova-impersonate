@@ -15,7 +15,7 @@
         props: ['resourceName', 'field'],
         methods: {
             onClick() {
-                window.open(`/nova-impersonate/users/${this.field.id}`, '_top');
+                window.open(`/nova-impersonate/users/${this.field.id}?redirect_to=${this.field.redirect_to}` , '_top');
             }
         },
     }

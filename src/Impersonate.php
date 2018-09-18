@@ -11,7 +11,8 @@ class Impersonate extends Field
 	public $component = 'impersonate-field';
 
 	public $meta = [
-		'hideText' => true
+		'hideText'    => true,
+		'redirect_to' => '/',
 	];
 
 	public function __construct($id = null)
