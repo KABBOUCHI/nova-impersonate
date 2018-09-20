@@ -4,7 +4,6 @@ namespace KABBOUCHI\NovaImpersonate;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Lab404\Impersonate\Services\ImpersonateManager;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
 
@@ -21,11 +20,17 @@ class ToolServiceProvider extends ServiceProvider
 		Nova::style('nova-impersonate', __DIR__ . '/../dist/css/field.css');
 
 		$this->loadViewsFrom(__DIR__ . '/../resources/views', 'nova-impersonate');
-		$this->publishes([ __DIR__ . '/../resources/views' => base_path('resources/views/vendor/nova-impersonate'),
+
+		$this->publishes([__DIR__ . '/../resources/views' => base_path('resources/views/vendor/nova-impersonate'),
 		], 'nova-impersonate-views');
 
+		$this->publishes([__DIR__ . '/../config/nova-impersonate.php' => config_path('nova-impersonate.php')
+		], 'nova-impersonate-config');
+
 		$this->app->booted(function () {
-			$this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(\KABBOUCHI\NovaImpersonate\Http\Middleware\Impersonate::class);
+			if (config('nova-impersonate.enable_middleware')) {
+				$this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(\KABBOUCHI\NovaImpersonate\Http\Middleware\Impersonate::class);
+			}
 			$this->routes();
 		});
 
@@ -50,6 +55,16 @@ class ToolServiceProvider extends ServiceProvider
 			->prefix('nova-impersonate')
 			->group(__DIR__ . '/../routes/api.php');
 
+	}
+
+	/**
+	 * Register bindings in the container.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
+		$this->mergeConfigFrom(__DIR__ . '/../config/nova-impersonate.php', 'nova-impersonate');
 	}
 
 }
