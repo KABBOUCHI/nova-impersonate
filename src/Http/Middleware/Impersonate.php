@@ -23,7 +23,17 @@ class Impersonate
 		/** @var ImpersonateManager $manager */
 		$manager = app()->make(ImpersonateManager::class);
 
-		if ($manager->isImpersonating() && !($response instanceof RedirectResponse) && $request->acceptsHtml() && !$request->expectsJson()) {
+		if (
+			auth()->check() &&
+
+			$manager->isImpersonating() &&
+
+			!($response instanceof RedirectResponse) &&
+
+			$request->acceptsHtml() &&
+
+			!$request->expectsJson()
+		) {
 
 			/** @var Response $response * */
 			$content = $response->getContent();
