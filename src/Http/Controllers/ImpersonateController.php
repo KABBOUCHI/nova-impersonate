@@ -24,7 +24,7 @@ class ImpersonateController extends Controller
 		$user_to_impersonate = $this->manager->findUserById($user);
 		$this->manager->take($request->user(), $user_to_impersonate);
 
-		return redirect()->to($request->get('redirect_to', '/'));
+		return redirect()->to($request->get('redirect_to', config('nova-impersonate.redirect_to')));
 	}
 
 	public function leave()
