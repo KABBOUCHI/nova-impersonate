@@ -5,6 +5,7 @@ namespace KABBOUCHI\NovaImpersonate\Http\Middleware;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Lab404\Impersonate\Services\ImpersonateManager;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Impersonate
 {
@@ -29,6 +30,8 @@ class Impersonate
 			$manager->isImpersonating() &&
 
 			!($response instanceof RedirectResponse) &&
+
+			!($response instanceof BinaryFileResponse) &&
 
 			$request->acceptsHtml() &&
 
