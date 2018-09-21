@@ -35,7 +35,9 @@ class Impersonate
 
 			$request->acceptsHtml() &&
 
-			!$request->expectsJson()
+			!$request->expectsJson() &&
+
+            		! \str_contains($request->path(), 'nova-api')
 		) {
 
 			/** @var Response $response * */
