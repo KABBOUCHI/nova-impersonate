@@ -18,8 +18,6 @@ You can install the package in to a Laravel app that uses [Nova](https://nova.la
 
 ```bash
 composer require kabbouchi/nova-impersonate
-php artisan vendor:publish --tag=nova-impersonate-views
-php artisan vendor:publish --tag=nova-impersonate-config
 ```
 
 ## Usage
@@ -85,6 +83,28 @@ class User extends Resource
 }
 ```
 
+You can optionally publish the config file with:
+```bash
+php artisan vendor:publish --tag=nova-impersonate-config
+```
+
+This is the default content of the config file published at `config/nova-impersonate.php`:
+```php
+<?php
+
+return [
+	'enable_middleware' => true, // To inject the 'nova-impersonate::reverse' view in every route when impersonating 
+	'redirect_back'     => true, // false (nova path), true or <url>
+	'redirect_to'       => '/',
+	'key_down'          => 'i', // Press `i` to impersonate user in details page
+];
+```
+
+You can publish and customize the `nova-impersonate::reverse` view
+
+```bash
+php artisan vendor:publish --tag=nova-impersonate-views
+```
 
 
 ## Credits
