@@ -24,6 +24,11 @@ class ImpersonateController extends Controller
 		$user_to_impersonate = $this->manager->findUserById($user);
 		$this->manager->take($request->user(), $user_to_impersonate);
 
+		$redirectBack = config('nova-impersonate.redirect_back');
+
+		if ($redirectBack)
+			session()->put('leave_redirect_to', $redirectBack === true ? url()->previous() : $redirectBack);
+
 		return redirect()->to($request->get('redirect_to', config('nova-impersonate.redirect_to')));
 	}
 
@@ -33,7 +38,7 @@ class ImpersonateController extends Controller
 		if ($this->manager->isImpersonating()) {
 			$this->manager->leave();
 
-			return redirect()->to(config('nova.path'));
+			return redirect()->to(session()->pull('leave_redirect_to') ?? config('nova.path'));
 		}
 
 		return redirect()->to('/');
