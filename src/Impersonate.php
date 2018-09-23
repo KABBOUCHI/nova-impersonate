@@ -19,11 +19,14 @@ class Impersonate extends Field
 	{
 		parent::__construct(null, null, null);
 
+		$this->withMeta(['key_down' => config('nova-impersonate.key_down')]);
+
 		if ($id) {
 			$this->withMeta(['id' => $id]);
 		}
 
-		$this->onlyOnIndex();
+		$this->exceptOnForms();
+
 
 	}
 }
