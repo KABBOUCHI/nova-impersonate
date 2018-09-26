@@ -21,7 +21,18 @@ class ImpersonateController extends Controller
 
 	public function take(Request $request, $user)
 	{
+
+		if (method_exists($request->user(), 'canImpersonate') && !$request->user()->canImpersonate()) {
+			abort(403);
+		}
+
 		$user_to_impersonate = $this->manager->findUserById($user);
+
+
+		if (method_exists($user_to_impersonate, 'canBeImpersonated') && !$user_to_impersonate->canBeImpersonated()) {
+			abort(403);
+		}
+
 		$this->manager->take($request->user(), $user_to_impersonate);
 
 		$redirectBack = config('nova-impersonate.redirect_back');

@@ -22,7 +22,7 @@ composer require kabbouchi/nova-impersonate
 
 ## Usage
 
-Add `Impersonate::make($this->id)` field in `App\Nova\User.php`
+Add `Impersonate::make($this)` field in `App\Nova\User.php`
 ```php
 <?php
 
@@ -59,20 +59,17 @@ class User extends Resource
 				->updateRules('nullable', 'string', 'min:6'),
 
 
-			Impersonate::make($this->id),  // <---
-			
+			Impersonate::make($this),  // <---
+		
 			// or
-			Impersonate::make()->withMeta([ 'id' => $this->id  ]),
-			
-			// or
-			Impersonate::make()->withMeta([
-			    'id' => $this->id,
+		
+			Impersonate::make($this)->withMeta([
 			    'hideText' => false,
 			]),
-			
+		
 			// or
+		
 			Impersonate::make()->withMeta([
-			    'id' => $this->id,
 			    'redirect_to' => '/custom-redirect-url'
 			]),
 
@@ -81,6 +78,36 @@ class User extends Resource
 
     ...
 }
+```
+
+### Defining impersonation authorization
+By default all users can **impersonate** an user.  
+You need to add the method `canImpersonate()` to your user model:
+
+```php
+    /**
+     * @return bool
+     */
+    public function canImpersonate()
+    {
+        // For example
+        return $this->is_admin == 1;
+    }
+```
+
+By default all users can **be impersonated**.  
+You need to add the method `canBeImpersonated()` to your user model to extend this behavior:
+Please make sure to pass instance Model or Nova Resource ``Impersonate::make($this)`` ``Impersonate::make($this->resource)``
+
+```php
+    /**
+     * @return bool
+     */
+    public function canBeImpersonated()
+    {
+        // For example
+        return $this->can_be_impersonated == 1;
+    }
 ```
 
 You can optionally publish the config file with:
