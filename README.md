@@ -80,7 +80,8 @@ class User extends Resource
 }
 ```
 
-### Defining impersonation authorization
+## Advanced Usage
+
 By default all users can **impersonate** an user.  
 You need to add the method `canImpersonate()` to your user model:
 
