@@ -69,7 +69,7 @@ class User extends Resource
 		
 			// or
 		
-			Impersonate::make()->withMeta([
+			Impersonate::make($this)->withMeta([
 			    'redirect_to' => '/custom-redirect-url'
 			]),
 
