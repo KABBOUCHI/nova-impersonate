@@ -125,6 +125,10 @@ return [
 	'redirect_back'     => true, // false (nova path), true or <url>
 	'redirect_to'       => '/',
 	'key_down'          => 'i', // Press `i` to impersonate user in details page
+	'middleware'        => [
+            'base' => 'web', // Middleware used for nova-impersonate routes
+            'leave'  => 'auth', // Extra middleware used for leave route
+    ],
 ];
 ```
 
