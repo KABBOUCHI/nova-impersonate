@@ -43,7 +43,10 @@ class Impersonate extends Field
 
 		}
 
-		$this->withMeta(['key_down' => config('nova-impersonate.key_down')]);
+		$this->withMeta([
+			'key_down' => config('nova-impersonate.key_down'),
+			'redirect_to' => config('nova-impersonate.redirect_to'),
+		]);
 
 
 		$this->exceptOnForms();
