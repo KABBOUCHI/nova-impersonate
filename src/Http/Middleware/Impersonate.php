@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Lab404\Impersonate\Services\ImpersonateManager;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class Impersonate
 {
@@ -32,6 +33,8 @@ class Impersonate
 			!($response instanceof RedirectResponse) &&
 
 			!($response instanceof BinaryFileResponse) &&
+			
+			!($response instanceof StreamedResponse) &&
 
 			$request->acceptsHtml() &&
 
