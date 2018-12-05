@@ -2,6 +2,7 @@
 
 namespace KABBOUCHI\NovaImpersonate\Http\Middleware;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Lab404\Impersonate\Services\ImpersonateManager;
@@ -35,12 +36,10 @@ class Impersonate
 			!($response instanceof BinaryFileResponse) &&
 			
 			!($response instanceof StreamedResponse) &&
+			
+			!($response instanceof JsonResponse) &&
 
-			$request->acceptsHtml() &&
-
-			!$request->expectsJson() &&
-
-            		! \str_contains($request->path(), 'nova-api')
+			$request->acceptsHtml()
 		) {
 
 			/** @var Response $response * */
