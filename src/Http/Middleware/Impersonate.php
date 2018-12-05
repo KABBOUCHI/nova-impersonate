@@ -39,6 +39,8 @@ class Impersonate
 			
 			!($response instanceof JsonResponse) &&
 
+			!$request->expectsJson() &&
+
 			$request->acceptsHtml()
 		) {
 
