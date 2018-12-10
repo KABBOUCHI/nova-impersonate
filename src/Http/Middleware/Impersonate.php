@@ -41,7 +41,9 @@ class Impersonate
 
 			!$request->expectsJson() &&
 
-			starts_with($response->headers->get('Content-Type'), 'text/html')
+			starts_with($response->headers->get('Content-Type'), 'text/html') &&
+
+			!str_contains($request->path(), 'nova-api')
 		) {
 
 			/** @var Response $response * */
