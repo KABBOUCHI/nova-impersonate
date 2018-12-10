@@ -41,7 +41,7 @@ class Impersonate
 
 			!$request->expectsJson() &&
 
-			$request->acceptsHtml()
+			starts_with($response->headers->get('Content-Type'), 'text/html')
 		) {
 
 			/** @var Response $response * */
