@@ -15,7 +15,7 @@ return [
     'redirect_to'       => '/',
     /**
      * Set true to record impersonation actions in Nova's action_events table
-     * Attache the `Laravel\Nova\Actions\Actionable` trait to the `User` Eloquent model
+     * Attach the `Laravel\Nova\Actions\Actionable` trait to the `User` Eloquent model
      */
     'actionable' => env('NOVA_IMPERSONATE_ACTIONABLE', false),
     /**
