@@ -14,6 +14,11 @@ return [
      */
     'redirect_to'       => '/',
     /**
+     * Set true to record impersonation actions in Nova's action_events table
+     * Attach the `Laravel\Nova\Actions\Actionable` trait to the `User` Eloquent model
+     */
+    'actionable' => env('NOVA_IMPERSONATE_ACTIONABLE', false),
+    /**
      * Bind on key press to impersonate user in details page
      */
     'key_down'          => 'i',
