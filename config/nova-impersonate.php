@@ -14,6 +14,10 @@ return [
      */
     'redirect_to'       => '/',
     /**
+     * Set true to record impersonation actions in Nova's action_events table
+     */
+    'actionable' => env('NOVA_IMPERSONATE_ACTIONABLE', false),
+    /**
      * Bind on key press to impersonate user in details page
      */
     'key_down'          => 'i',
