@@ -110,6 +110,18 @@ Please make sure to pass instance Model or Nova Resource ``Impersonate::make($th
         return $this->can_be_impersonated == 1;
     }
 ```
+---
+
+#### Events
+
+You can hook onto the underlying package events
+
+May be userful for things like setting session data
+
+- `Lab404\Impersonate\Events\TakeImpersonation`
+- `Lab404\Impersonate\Events\LeaveImpersonation`
+
+---
 
 You can optionally publish the config file with:
 ```bash
