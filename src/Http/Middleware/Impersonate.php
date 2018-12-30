@@ -27,9 +27,9 @@ class Impersonate
 		$manager = app()->make(ImpersonateManager::class);
 
 		if (
-			auth()->check() &&
-
 			$manager->isImpersonating() &&
+			
+			auth()->check() &&
 
 			!($response instanceof RedirectResponse) &&
 
