@@ -2,6 +2,7 @@
     <a @click="onClick"
        class="impersonate cursor-pointer text-70 hover:text-primary no-underline flex items-center"
        :style='field.hideText ? "width:22px" : ""'
+       title="{{ __('Impersonate') }}"
     >
         <svg width="22" height="18" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
             <path fill="currentColor"
