@@ -19,6 +19,8 @@ class Impersonate extends Field
 	{
 		parent::__construct(null, null, null);
 
+		$this->exceptOnForms();
+		
 		if (method_exists(auth()->user(), 'canImpersonate') && !auth()->user()->canImpersonate()) {
 			$this->component = null;
 
@@ -47,10 +49,6 @@ class Impersonate extends Field
 			'key_down' => config('nova-impersonate.key_down'),
 			'redirect_to' => config('nova-impersonate.redirect_to'),
 		]);
-
-
-		$this->exceptOnForms();
-
 
 	}
 }
