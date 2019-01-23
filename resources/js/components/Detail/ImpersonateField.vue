@@ -25,6 +25,9 @@
         created() {
             document.addEventListener('keydown', this.handleKeyDown);
         },
+        destroyed(){
+            document.removeEventListener('keydown', this.handleKeyDown);
+        },
         methods: {
             handleKeyDown(e) {
                 if (e.key === this.field.key_down) {
