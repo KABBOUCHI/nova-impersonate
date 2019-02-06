@@ -6,8 +6,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Lab404\Impersonate\Services\ImpersonateManager;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Impersonate
 {
@@ -28,15 +28,15 @@ class Impersonate
 
 		if (
 			$manager->isImpersonating() &&
-			
+
 			auth()->check() &&
 
 			!($response instanceof RedirectResponse) &&
 
 			!($response instanceof BinaryFileResponse) &&
-			
+
 			!($response instanceof StreamedResponse) &&
-			
+
 			!($response instanceof JsonResponse) &&
 
 			!$request->expectsJson() &&
