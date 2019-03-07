@@ -1,4 +1,11 @@
-<div style="
+<style>
+    @media print{
+       .noprint{
+           display:none;
+       }
+    }
+</style>
+<div class="noprint" style="
      position: fixed;
      padding: 15px 20px 15px 15px;
      min-width: 160px;
