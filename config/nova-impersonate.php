@@ -35,4 +35,8 @@ return [
          */
         'leave' => 'auth',
     ],
+	/**
+	 * Leave impersonate before impersonating a user
+	 */
+	'leave_before_impersonate'       => false,
 ];
