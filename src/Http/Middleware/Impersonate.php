@@ -2,58 +2,57 @@
 
 namespace KABBOUCHI\NovaImpersonate\Http\Middleware;
 
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Lab404\Impersonate\Services\ImpersonateManager;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Impersonate
 {
-	/**
-	 * Handle the incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  \Closure $next
-	 * @return \Illuminate\Http\Response
-	 */
-	public function handle($request, $next)
-	{
+    /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @return \Illuminate\Http\Response
+     */
+    public function handle($request, $next)
+    {
+        $response = $next($request);
 
-		$response = $next($request);
+        /** @var ImpersonateManager $manager */
+        $manager = app()->make(ImpersonateManager::class);
 
-		/** @var ImpersonateManager $manager */
-		$manager = app()->make(ImpersonateManager::class);
+        if (
+            $manager->isImpersonating() &&
 
-		if (
-			$manager->isImpersonating() &&
-			
-			auth()->check() &&
+            auth()->check() &&
 
-			!($response instanceof RedirectResponse) &&
+            ! ($response instanceof RedirectResponse) &&
 
-			!($response instanceof BinaryFileResponse) &&
-			
-			!($response instanceof StreamedResponse) &&
-			
-			!($response instanceof JsonResponse) &&
+            ! ($response instanceof BinaryFileResponse) &&
 
-			!$request->expectsJson() &&
+            ! ($response instanceof StreamedResponse) &&
 
-			starts_with($response->headers->get('Content-Type'), 'text/html') &&
+            ! ($response instanceof JsonResponse) &&
 
-			!str_contains($request->path(), 'nova-api')
-		) {
+            ! $request->expectsJson() &&
 
-			/** @var Response $response * */
-			$content = $response->getContent();
+            starts_with($response->headers->get('Content-Type'), 'text/html') &&
 
-			$content .= view('nova-impersonate::reverse')->render();
+            ! str_contains($request->path(), 'nova-api')
+        ) {
 
-			$response->setContent($content);
-		}
+            /** @var Response $response * */
+            $content = $response->getContent();
 
-		return $response;
-	}
+            $content .= view('nova-impersonate::reverse')->render();
+
+            $response->setContent($content);
+        }
+
+        return $response;
+    }
 }
