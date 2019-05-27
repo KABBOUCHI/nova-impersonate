@@ -33,16 +33,16 @@ class ImpersonateController extends Controller
             abort(403);
         }
 
-        if (config('nova-impersonate.actionable')) {
-            $this->recordAction($request->user()->getKey(), $user_to_impersonate, 'Impersonate');
-        }
-
         if (config('nova-impersonate.leave_before_impersonate') && $this->manager->isImpersonating()) {
             if (config('nova-impersonate.actionable')) {
                 $this->recordAction($this->manager->getImpersonatorId(), auth()->user(), 'Leave Impersonation');
             }
 
             $this->manager->leave();
+        }
+
+        if (config('nova-impersonate.actionable')) {
+            $this->recordAction($request->user()->getKey(), $user_to_impersonate, 'Impersonate');
         }
 
         $this->manager->take($request->user(), $user_to_impersonate);
