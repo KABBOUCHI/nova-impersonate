@@ -5,7 +5,7 @@
        }
     }
 </style>
-<div class="noprint" style="
+<div class="noprint reverse-impersonate-container" style="
      position: fixed;
      padding: 15px 20px 15px 15px;
      min-width: 160px;
