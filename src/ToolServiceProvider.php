@@ -52,6 +52,7 @@ class ToolServiceProvider extends ServiceProvider
 
         Route::middleware(array_wrap(config('nova-impersonate.middleware.base')))
             ->prefix('nova-impersonate')
+            ->name('nova.impersonate')
             ->group(__DIR__.'/../routes/api.php');
     }
 
