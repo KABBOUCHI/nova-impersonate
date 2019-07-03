@@ -14,6 +14,6 @@ use KABBOUCHI\NovaImpersonate\Http\Controllers\ImpersonateController;
 |
 */
 
-Route::get('users/{id}', ImpersonateController::class . '@take')->middleware(['nova'])->name('take');
+Route::get('users/{id}', ImpersonateController::class.'@take')->middleware(['nova'])->name('take');
 
-Route::get('leave', ImpersonateController::class . '@leave')->middleware([config('nova-impersonate.middleware.leave')])->name('leave');
+Route::get('leave', ImpersonateController::class.'@leave')->middleware([config('nova-impersonate.middleware.leave')])->name('leave');
