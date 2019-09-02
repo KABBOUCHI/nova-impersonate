@@ -3,6 +3,7 @@
 namespace KABBOUCHI\NovaImpersonate;
 
 use Laravel\Nova\Nova;
+use Illuminate\Support\Arr;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -50,7 +51,7 @@ class ToolServiceProvider extends ServiceProvider
             return;
         }
 
-        Route::middleware(array_wrap(config('nova-impersonate.middleware.base')))
+        Route::middleware(Arr::wrap(config('nova-impersonate.middleware.base')))
             ->prefix('nova-impersonate')
             ->name('nova.impersonate.')
             ->group(__DIR__.'/../routes/api.php');
