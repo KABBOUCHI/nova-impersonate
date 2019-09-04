@@ -31,19 +31,19 @@ class Impersonate
 
             auth()->check() &&
 
-            !($response instanceof RedirectResponse) &&
+            ! ($response instanceof RedirectResponse) &&
 
-            !($response instanceof BinaryFileResponse) &&
+            ! ($response instanceof BinaryFileResponse) &&
 
-            !($response instanceof StreamedResponse) &&
+            ! ($response instanceof StreamedResponse) &&
 
-            !($response instanceof JsonResponse) &&
+            ! ($response instanceof JsonResponse) &&
 
-            !$request->expectsJson() &&
+            ! $request->expectsJson() &&
 
             Str::startsWith($response->headers->get('Content-Type'), 'text/html') &&
 
-            !Str::contains($request->path(), 'nova-api')
+            ! Str::contains($request->path(), 'nova-api')
         ) {
 
             /** @var Response $response * */
