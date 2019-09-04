@@ -2,6 +2,7 @@
 
 namespace KABBOUCHI\NovaImpersonate\Http\Middleware;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -30,19 +31,19 @@ class Impersonate
 
             auth()->check() &&
 
-            ! ($response instanceof RedirectResponse) &&
+            !($response instanceof RedirectResponse) &&
 
-            ! ($response instanceof BinaryFileResponse) &&
+            !($response instanceof BinaryFileResponse) &&
 
-            ! ($response instanceof StreamedResponse) &&
+            !($response instanceof StreamedResponse) &&
 
-            ! ($response instanceof JsonResponse) &&
+            !($response instanceof JsonResponse) &&
 
-            ! $request->expectsJson() &&
+            !$request->expectsJson() &&
 
-            starts_with($response->headers->get('Content-Type'), 'text/html') &&
+            Str::startsWith($response->headers->get('Content-Type'), 'text/html') &&
 
-            ! str_contains($request->path(), 'nova-api')
+            !Str::contains($request->path(), 'nova-api')
         ) {
 
             /** @var Response $response * */
