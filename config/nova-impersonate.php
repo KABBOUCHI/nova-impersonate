@@ -1,6 +1,19 @@
 <?php
 
 return [
+
+    /*
+     * Enable multi-guard feature
+     */
+    'enable_multi_guard' => false,
+    /**
+     * The default impersonator guard used.
+     */
+    'default_impersonator_guard' => 'web',
+    /**
+     * Impersonator guards to be used.
+     */
+    'impersonator_guards' => ['web'],
     /*
      * To inject the 'nova-impersonate::reverse' view in every route when impersonating
      */

@@ -21,15 +21,17 @@ class ImpersonateController extends Controller
         $this->manager = app()->make(ImpersonateManager::class);
     }
 
-    public function take(Request $request, $id)
+    public function take(Request $request, $id, $guardName = null)
     {
-        if (method_exists($request->user(), 'canImpersonate') && ! $request->user()->canImpersonate()) {
+        $guardName = $guardName ?? config('nova-impersonate.default_impersonator_guard');
+
+        if (method_exists($request->user(), 'canImpersonate') && !$request->user()->canImpersonate()) {
             abort(403);
         }
 
-        $user_to_impersonate = $this->manager->findUserById($id);
+        $user_to_impersonate = $this->manager->findUserById($id, $guardName);
 
-        if (method_exists($user_to_impersonate, 'canBeImpersonated') && ! $user_to_impersonate->canBeImpersonated()) {
+        if (method_exists($user_to_impersonate, 'canBeImpersonated') && !$user_to_impersonate->canBeImpersonated()) {
             abort(403);
         }
 
@@ -45,7 +47,7 @@ class ImpersonateController extends Controller
             $this->recordAction($request->user()->getKey(), $user_to_impersonate, 'Impersonate');
         }
 
-        $this->manager->take($request->user(), $user_to_impersonate);
+        $this->manager->take($request->user(), $user_to_impersonate, $guardName);
 
         $redirectBack = config('nova-impersonate.redirect_back');
 
