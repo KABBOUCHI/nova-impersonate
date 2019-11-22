@@ -2,13 +2,13 @@
 
 namespace KABBOUCHI\NovaImpersonate\Http\Middleware;
 
-use Illuminate\Support\Str;
-use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Lab404\Impersonate\Services\ImpersonateManager;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class Impersonate
 {

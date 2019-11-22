@@ -2,9 +2,9 @@
 
 namespace KABBOUCHI\NovaImpersonate;
 
-use Laravel\Nova\Resource;
-use Laravel\Nova\Fields\Field;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Resource;
 
 class Impersonate extends Field
 {

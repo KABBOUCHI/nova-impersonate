@@ -2,11 +2,11 @@
 
 namespace KABBOUCHI\NovaImpersonate\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Laravel\Nova\Actions\ActionEvent;
+use Illuminate\Support\Str;
 use Lab404\Impersonate\Services\ImpersonateManager;
+use Laravel\Nova\Actions\ActionEvent;
 
 class ImpersonateController extends Controller
 {
