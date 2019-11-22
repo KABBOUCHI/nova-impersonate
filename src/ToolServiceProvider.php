@@ -17,15 +17,17 @@ class ToolServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Nova::script('nova-impersonate', __DIR__.'/../dist/js/field.js');
-        Nova::style('nova-impersonate', __DIR__.'/../dist/css/field.css');
+        Nova::script('nova-impersonate', __DIR__ . '/../dist/js/field.js');
+        Nova::style('nova-impersonate', __DIR__ . '/../dist/css/field.css');
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nova-impersonate');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nova-impersonate');
 
-        $this->publishes([__DIR__.'/../resources/views' => base_path('resources/views/vendor/nova-impersonate'),
+        $this->publishes([
+            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/nova-impersonate'),
         ], 'nova-impersonate-views');
 
-        $this->publishes([__DIR__.'/../config/nova-impersonate.php' => config_path('nova-impersonate.php'),
+        $this->publishes([
+            __DIR__ . '/../config/nova-impersonate.php' => config_path('nova-impersonate.php'),
         ], 'nova-impersonate-config');
 
         $this->app->booted(function () {
@@ -51,10 +53,12 @@ class ToolServiceProvider extends ServiceProvider
             return;
         }
 
-        Route::middleware(Arr::wrap(config('nova-impersonate.middleware.base')))
-            ->prefix('nova-impersonate')
-            ->name('nova.impersonate.')
-            ->group(__DIR__.'/../routes/api.php');
+        if (config('nova-impersonate.enable_routes', true)) {
+            Route::middleware(Arr::wrap(config('nova-impersonate.middleware.base')))
+                ->prefix('nova-impersonate')
+                ->name('nova.impersonate.')
+                ->group(__DIR__ . '/../routes/api.php');
+        }
     }
 
     /**
@@ -64,6 +68,6 @@ class ToolServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/nova-impersonate.php', 'nova-impersonate');
+        $this->mergeConfigFrom(__DIR__ . '/../config/nova-impersonate.php', 'nova-impersonate');
     }
 }

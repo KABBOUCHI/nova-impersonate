@@ -19,6 +19,10 @@ return [
      */
     'enable_middleware' => true,
     /*
+     * Enable nova routes
+     */
+    'enable_routes' => true,
+    /*
      * false (nova path), true or <url>
      */
     'redirect_back'     => true,
