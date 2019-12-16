@@ -1,7 +1,7 @@
 <template>
   <a
     @click="onClick"
-    class="impersonate cursor-pointer text-70 hover:text-primary no-underline flex items-center"
+    class="impersonate cursor-pointer text-70 hover:text-primary no-underline inline-flex items-center"
     :style="field.hideText ? 'width:22px' : ''"
     :title="__('Impersonate')"
   >
@@ -78,6 +78,7 @@ export default {
 
     parentElement.classList.add("td-fit");
     parentElement.style.paddingRight = "0px";
+    parentElement.style.minWidth = "auto";
   }
 };
 </script>
