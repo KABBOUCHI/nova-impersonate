@@ -45,40 +45,24 @@
 </template>
 
 <script>
-import ImpersonateModal from "../Shared/ImpersonateModal.vue";
+    import HandlesFieldValue from "../../mixins/HandlesFieldValue";
+    import ImpersonateModal from "../Shared/ImpersonateModal.vue";
 
-export default {
-  components: { ImpersonateModal },
-  props: ["resourceName", "field"],
-  data() {
-    return {
-      guard: this.field.default_impersonator_guard,
-      guards: this.field.impersonator_guards,
-      openModal: false
+    export default {
+
+        components: {ImpersonateModal},
+
+        mixins: [HandlesFieldValue],
+
+        props: ["resourceName", "field"],
+
+        mounted() {
+            let parentElement = this.$el.parentElement;
+
+            parentElement.classList.add("td-fit");
+            parentElement.style.paddingRight = "0px";
+            parentElement.style.minWidth = "auto";
+        },
+
     };
-  },
-  methods: {
-    onClick() {
-      if (this.field.enable_multi_guard === false) {
-        this.openUrl();
-      } else {
-        this.openModal = true;
-      }
-    },
-    openUrl() {
-      this.openModal = false;
-      window.open(
-        `/nova-impersonate/users/${this.field.id}/${this.guard}?redirect_to=${this.field.redirect_to}`,
-        "_self"
-      );
-    }
-  },
-  mounted() {
-    let parentElement = this.$el.parentElement;
-
-    parentElement.classList.add("td-fit");
-    parentElement.style.paddingRight = "0px";
-    parentElement.style.minWidth = "auto";
-  }
-};
 </script>
