@@ -24,13 +24,13 @@ class ImpersonateController extends Controller
     {
         $guardName = $guardName ?? config('nova-impersonate.default_impersonator_guard');
 
-        if (method_exists($request->user(), 'canImpersonate') && !$request->user()->canImpersonate()) {
+        if (method_exists($request->user(), 'canImpersonate') && ! $request->user()->canImpersonate()) {
             abort(403);
         }
 
         $user_to_impersonate = $this->manager->findUserById($id, $guardName);
 
-        if (method_exists($user_to_impersonate, 'canBeImpersonated') && !$user_to_impersonate->canBeImpersonated()) {
+        if (method_exists($user_to_impersonate, 'canBeImpersonated') && ! $user_to_impersonate->canBeImpersonated()) {
             abort(403);
         }
 
