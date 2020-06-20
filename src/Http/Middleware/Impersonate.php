@@ -6,7 +6,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
-use Lab404\Impersonate\Services\ImpersonateManager;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -23,27 +22,26 @@ class Impersonate
     {
         $response = $next($request);
 
-        /** @var ImpersonateManager $manager */
-        $manager = app()->make(ImpersonateManager::class);
+        $manager = app('impersonate');
 
         if (
             $manager->isImpersonating() &&
 
             auth()->check() &&
 
-            ! ($response instanceof RedirectResponse) &&
+            !($response instanceof RedirectResponse) &&
 
-            ! ($response instanceof BinaryFileResponse) &&
+            !($response instanceof BinaryFileResponse) &&
 
-            ! ($response instanceof StreamedResponse) &&
+            !($response instanceof StreamedResponse) &&
 
-            ! ($response instanceof JsonResponse) &&
+            !($response instanceof JsonResponse) &&
 
-            ! $request->expectsJson() &&
+            !$request->expectsJson() &&
 
             Str::startsWith($response->headers->get('Content-Type'), 'text/html') &&
 
-            ! Str::contains($request->path(), 'nova-api')
+            !Str::contains($request->path(), 'nova-api')
         ) {
 
             /** @var Response $response * */
