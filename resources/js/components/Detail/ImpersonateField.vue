@@ -19,7 +19,7 @@
           mode="delete"
         >
           <div class="p-8">
-            <heading :level="2" class="mb-6">Impersonate ({{ field.impersonate_target_name }})</heading>
+            <heading :level="2" class="mb-6">{{ __('Impersonate') }} ({{ field.impersonate_target_name }})</heading>
 
             <div class="text-80 leading-normal flex items-center">
               <label class="mr-4">Guard:</label>
