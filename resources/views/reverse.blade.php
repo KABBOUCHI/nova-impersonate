@@ -27,12 +27,12 @@
 >
     <p>
         @if( auth()->user()->name )
-            Impersonating as {{ auth()->user()->name }}
+            {{ __('Impersonating as') }} {{ auth()->user()->name }}
         @endif
     </p>
 
     <a href="{{ route('nova.impersonate.leave') }}" style="text-decoration:underline;color: black;font-weight: bold">
-        Reverse impersonate!
+        {{ __('Reverse impersonate!') }}
     </a>
 </div>
 <script>
