@@ -60,5 +60,5 @@ return [
      * Use a custom impersonation manager instead of the default 404labfr impersonate package.
      * E.g. \App\Services\ImpersonateService - implement Contracts\Impersonate.
      */
-    'manager' => 'impersonate',
+    'manager' => null,
 ];
