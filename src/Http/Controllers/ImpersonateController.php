@@ -5,11 +5,12 @@ namespace KABBOUCHI\NovaImpersonate\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
+use KABBOUCHI\NovaImpersonate\Contracts\Impersonate;
 use Laravel\Nova\Actions\ActionEvent;
 
 class ImpersonateController extends Controller
 {
-    /** @var ImpersonateManager */
+    /** @var Impersonate */
     protected $manager;
 
     /**
@@ -17,7 +18,7 @@ class ImpersonateController extends Controller
      */
     public function __construct()
     {
-        $this->manager = app('impersonate');
+        $this->manager = app(config('nova-impersonate.manager', 'impersonate'));
     }
 
     public function take(Request $request, $id, $guardName = null)
