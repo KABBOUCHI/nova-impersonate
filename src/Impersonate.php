@@ -25,15 +25,16 @@ class Impersonate extends Field
 
         $this->exceptOnForms();
 
-        if (method_exists(auth()->user(), 'canImpersonate') && ! auth()->user()->canImpersonate()) {
+        $authUser = auth()->user();
+        if (method_exists($authUser, 'canImpersonate') && ! $authUser->canImpersonate()) {
             $this->component = null;
 
             return;
         }
 
-        if ($user != null) {
+        if ($user !== null) {
             if (is_numeric($user) || is_string($user)) {
-                $this->withMeta(['id' => $user instanceof Model ? $user->getKey() : $user]);
+                $this->withMeta(['id' => $user]);
             } else {
                 $user = $user instanceof Resource ? $user->resource : $user;
 
