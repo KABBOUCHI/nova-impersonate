@@ -62,6 +62,10 @@ class User extends Resource
 			Impersonate::make($this),  // <---
 		
 			// or
+            
+            Impersonate::make($this->resource), // works in lenses
+            
+            // or
 		
 			Impersonate::make($this)->withMeta([
 			    'hideText' => false,
