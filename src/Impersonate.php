@@ -26,7 +26,7 @@ class Impersonate extends Field
         $this->exceptOnForms();
 
         $authUser = auth()->user();
-        if (method_exists($authUser, 'canImpersonate') && ! $authUser->canImpersonate()) {
+        if (method_exists($authUser, 'canImpersonate') && ! $authUser->canImpersonate($user)) {
             $this->component = null;
 
             return;
@@ -38,7 +38,7 @@ class Impersonate extends Field
             } else {
                 $user = $user instanceof Resource ? $user->resource : $user;
 
-                if (method_exists($user, 'canBeImpersonated') && ! $user->canBeImpersonated()) {
+                if (method_exists($user, 'canBeImpersonated') && ! $user->canBeImpersonated($authUser)) {
                     $this->component = null;
 
                     return;

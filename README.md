@@ -93,7 +93,7 @@ You need to add the method `canImpersonate()` to your user model:
     /**
      * @return bool
      */
-    public function canImpersonate()
+    public function canImpersonate($impersonated = null)
     {
         // For example
         return $this->is_admin == 1;
@@ -108,7 +108,7 @@ Please make sure to pass instance Model or Nova Resource ``Impersonate::make($th
     /**
      * @return bool
      */
-    public function canBeImpersonated()
+    public function canBeImpersonated(?\Illuminate\Contracts\Auth\Authenticatable $impersonator = null)
     {
         // For example
         return $this->can_be_impersonated == 1;
