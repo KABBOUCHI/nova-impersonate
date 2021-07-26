@@ -18,7 +18,6 @@ class ToolServiceProvider extends ServiceProvider
     public function boot()
     {
         Nova::script('nova-impersonate', __DIR__.'/../dist/js/field.js');
-        Nova::style('nova-impersonate', __DIR__.'/../dist/css/field.css');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'nova-impersonate');
 
