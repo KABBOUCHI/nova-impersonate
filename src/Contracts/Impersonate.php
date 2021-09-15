@@ -10,8 +10,8 @@ interface Impersonate
     public function clear();
 
     /**
-     * @param int $id
-     * @param string|null $guardName
+     * @param  int  $id
+     * @param  string|null  $guardName
      * @return \Illuminate\Contracts\Auth\Authenticatable
      */
     public function findUserById($id, $guardName = null);
@@ -27,9 +27,9 @@ interface Impersonate
     public function isImpersonating();
 
     /**
-     * @param \Illuminate\Contracts\Auth\Authenticatable $from
-     * @param \Illuminate\Contracts\Auth\Authenticatable $to
-     * @param string|null $guardName
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $from
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $to
+     * @param  string|null  $guardName
      * @return bool
      */
     public function take($from, $to, $guardName = null);

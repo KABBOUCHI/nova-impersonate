@@ -28,13 +28,13 @@ class ImpersonateController extends Controller
         if (method_exists($request->user(), 'canImpersonate')) {
             abort(403);
         }
-        
+
         $user_to_impersonate = $this->manager->findUserById($id, $guardName);
-        
+
         if (! $request->user()->canImpersonate($user_to_impersonate)) {
             abort(403);
         }
-        
+
         if (method_exists($user_to_impersonate, 'canBeImpersonated') && ! $user_to_impersonate->canBeImpersonated($request->user())) {
             abort(403);
         }
