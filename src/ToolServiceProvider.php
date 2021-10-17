@@ -17,8 +17,6 @@ class ToolServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Nova::script('nova-impersonate', __DIR__.'/../dist/js/field.js');
-
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'nova-impersonate');
 
         $this->publishes([
@@ -37,7 +35,7 @@ class ToolServiceProvider extends ServiceProvider
         });
 
         Nova::serving(function (ServingNova $event) {
-            //
+            Nova::script('nova-impersonate', __DIR__.'/../dist/js/field.js');
         });
     }
 
