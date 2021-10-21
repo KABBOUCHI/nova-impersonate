@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
 use KABBOUCHI\NovaImpersonate\Contracts\Impersonate;
-use Laravel\Nova\Actions\ActionEvent;
+use Laravel\Nova\Actions\ActionResource;
 
 class ImpersonateController extends Controller
 {
@@ -75,7 +75,7 @@ class ImpersonateController extends Controller
 
     protected function recordAction($userId, $user_to_impersonate, $actionName)
     {
-        ActionEvent::create([
+        ActionResource::newModel()->create([
             'batch_id' => (string) Str::orderedUuid(),
             'user_id' => $userId,
             'name' => $actionName,
