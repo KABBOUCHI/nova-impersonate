@@ -23,11 +23,11 @@ class Impersonate
         $response = $next($request);
 
         $manager = app('impersonate');
-
+        $impersonatorGuardName = $manager->getImpersonatorGuardUsingName();
         if (
             $manager->isImpersonating() &&
 
-            auth()->check() &&
+            auth($impersonatorGuardName)->check() &&
 
             ! ($response instanceof RedirectResponse) &&
 
@@ -47,7 +47,9 @@ class Impersonate
             /** @var Response $response * */
             $content = $response->getContent();
 
-            $content .= view('nova-impersonate::reverse')->render();
+            $content .= view('nova-impersonate::reverse', [
+                'impersonatorGuardName' => $impersonatorGuardName,
+            ])->render();
 
             $response->setContent($content);
         }
