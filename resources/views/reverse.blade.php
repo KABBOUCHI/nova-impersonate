@@ -26,8 +26,8 @@
     "
 >
     <p>
-        @if( auth()->user()->name )
-            {{ __('Impersonating as') }} {{ auth()->user()->name }}
+        @if( auth($impersonatorGuardName)->user()->name )
+            {{ __('Impersonating as') }} {{ auth($impersonatorGuardName)->user()->name }}
         @endif
     </p>
 
