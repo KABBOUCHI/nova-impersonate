@@ -7,7 +7,6 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=7.1.0",
         "lab404/laravel-impersonate": "^1.7.3"
     },
     "autoload": {
