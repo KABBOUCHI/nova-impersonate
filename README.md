@@ -114,6 +114,21 @@ Please make sure to pass instance Model or Nova Resource ``Impersonate::make($th
         return $this->can_be_impersonated == 1;
     }
 ```
+
+By default `name` field is used for when displaying what user is impersonated at a moment.
+You need to add the method `impersonateName()` to your user model to extend this behavior:
+Please make sure to pass instance Model or Nova Resource ``Impersonate::make($this)`` ``Impersonate::make($this->resource)``
+
+```php
+    /**
+     * @return string
+     */
+    public function impersonateName()
+    {
+        // For example
+        return $this->email;
+    }
+```
 ---
 
 #### Events
