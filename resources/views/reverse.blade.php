@@ -26,7 +26,9 @@
     "
 >
     <p>
-        @if( auth($impersonatorGuardName)->user()->name )
+        @if(method_exists(auth($impersonatorGuardName)->user(), 'impersonateName'))
+            {{ __('Impersonating as') }} {{ auth($impersonatorGuardName)->user()->impersonateName() }}
+        @elseif( auth($impersonatorGuardName)->user()->name )
             {{ __('Impersonating as') }} {{ auth($impersonatorGuardName)->user()->name }}
         @endif
     </p>
