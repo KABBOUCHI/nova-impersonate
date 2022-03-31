@@ -1,11 +1,11 @@
 <style>
-    @media print{
-       .noprint{
-           display:none;
-       }
+    @media print {
+        .noprint {
+            display: none;
+        }
     }
 </style>
-<div class="noprint reverse-impersonate-container" data-position="0" style="
+<div class="noprint" id="reverse-impersonate-container" data-position="0" style="
      position: fixed;
      padding: 15px 20px 15px 15px;
      min-width: 160px;
@@ -25,17 +25,32 @@
     -ms-user-select: none;
     "
 >
-    <p>
-        @if(method_exists(auth($impersonatorGuardName)->user(), 'impersonateName'))
-            {{ __('Impersonating as') }} {{ auth($impersonatorGuardName)->user()->impersonateName() }}
-        @elseif( auth($impersonatorGuardName)->user()->name )
-            {{ __('Impersonating as') }} {{ auth($impersonatorGuardName)->user()->name }}
-        @endif
-    </p>
+    @if(config('nova-impersonate.hide_panel'))
+        <div class="float-left" id="reverse-impersonate-container-hide-show-button" data-position="0"
+             style="
+         height: 100%;
+         padding: 10px 8px;
+         margin-right: 10px;
+         font-weight: bold;
+         font-size: 25px;
+">
+            >
+        </div>
+    @endif
+    <div class="float-right">
+        <p>
+            @if(method_exists(auth($impersonatorGuardName)->user(), 'impersonateName'))
+                {{ __('Impersonating as') }} {{ auth($impersonatorGuardName)->user()->impersonateName() }}
+            @elseif( auth($impersonatorGuardName)->user()->name )
+                {{ __('Impersonating as') }} {{ auth($impersonatorGuardName)->user()->name }}
+            @endif
+        </p>
 
-    <a href="{{ route('nova.impersonate.leave') }}" style="text-decoration:underline;color: black;font-weight: bold">
-        {{ __('Reverse impersonate!') }}
-    </a>
+        <a href="{{ route('nova.impersonate.leave') }}"
+           style="text-decoration:underline;color: black;font-weight: bold">
+            {{ __('Reverse impersonate!') }}
+        </a>
+    </div>
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -49,10 +64,27 @@
                 : '25%';
         }
 
-        var shields = document.getElementsByClassName('reverse-impersonate-container');
+        let container = document.getElementById('reverse-impersonate-container');
+        container.addEventListener('dblclick', reverseImpersonateContainerOnDblclick)
 
-        for (var i = 0; i < shields.length; i++) {
-            shields[i].addEventListener('dblclick', reverseImpersonateContainerOnDblclick)
+        @if(config('nova-impersonate.hide_panel'))
+        function showHideContainer(event) {
+            let attribute = 'data-position',
+                position = !parseInt(event.target.getAttribute(attribute));
+
+            let container = document.getElementById('reverse-impersonate-container');
+            event.target.setAttribute(attribute, +position);
+            event.target.innerHTML = position
+                ? '<'
+                : '>';
+            container.style.right = position
+                ? 50 - container.offsetWidth + 'px'
+                : '-5px';
         }
+
+        let button = document.getElementById('reverse-impersonate-container-hide-show-button');
+        button.addEventListener('click', showHideContainer);
+        button.click();
+        @endif
     });
 </script>

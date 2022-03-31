@@ -56,6 +56,10 @@ return [
      * Leave impersonate before impersonating a user
      */
     'leave_before_impersonate'       => false,
+    /**
+     * Hide panel by default on page load
+     */
+    'hide_panel' => false,
     /*
      * Use a custom impersonation manager instead of the default 404labfr impersonate package.
      * E.g. \App\Services\ImpersonateService - implement Contracts\Impersonate.
