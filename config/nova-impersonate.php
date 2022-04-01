@@ -57,7 +57,7 @@ return [
      */
     'leave_before_impersonate'       => false,
     /**
-     * Hide panel by default on page load
+     * Hide panel by default on page load.
      */
     'hide_panel' => false,
     /*
