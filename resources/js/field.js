@@ -1,11 +1,11 @@
 Nova.booting((Vue, router) => {
-  Vue.config.devtools = true;
+  //Vue.config.devtools = true;
   Vue.component(
-    "index-impersonate-field",
-    require("./components/Index/ImpersonateField")
+    "IndexImpersonateField",
+    require("./components/Index/ImpersonateField").default
   );
   Vue.component(
-    "detail-impersonate-field",
-    require("./components/Detail/ImpersonateField")
+    "DetailImpersonateField",
+    require("./components/Detail/ImpersonateField").default
   );
 });
