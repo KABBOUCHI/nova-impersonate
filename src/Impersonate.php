@@ -21,7 +21,7 @@ class Impersonate extends Field
 
     public function __construct($user = null)
     {
-        parent::__construct(null, null, null);
+        parent::__construct('', null, null);
 
         $this->exceptOnForms();
 
