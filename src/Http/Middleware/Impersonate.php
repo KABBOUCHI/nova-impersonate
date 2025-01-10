@@ -43,7 +43,6 @@ class Impersonate
 
             ! Str::contains($request->path(), 'nova-api')
         ) {
-
             /** @var Response $response * */
             $content = $response->getContent();
 

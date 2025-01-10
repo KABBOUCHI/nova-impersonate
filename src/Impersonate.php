@@ -11,7 +11,7 @@ class Impersonate extends Field
     public $textAlign = 'center';
     public $component = 'impersonate-field';
     public $meta = [
-        'hideText'    => true,
+        'hideText' => true,
         'redirect_to' => '/',
         'enable_multi_guard' => false,
         'impersonator_guards' => ['web'],
@@ -52,8 +52,8 @@ class Impersonate extends Field
             'key_down' => config('nova-impersonate.key_down'),
             'redirect_to' => config('nova-impersonate.redirect_to'),
             'enable_multi_guard' => config('nova-impersonate.enable_multi_guard'),
-            'impersonator_guards' =>  config('nova-impersonate.impersonator_guards'),
-            'default_impersonator_guard' =>  config('nova-impersonate.default_impersonator_guard'),
+            'impersonator_guards' => config('nova-impersonate.impersonator_guards'),
+            'default_impersonator_guard' => config('nova-impersonate.default_impersonator_guard'),
             'impersonate_target_name' => $user->name ?? $user->email ?? null,
         ]);
     }

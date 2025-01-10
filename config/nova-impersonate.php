@@ -25,11 +25,11 @@ return [
     /*
      * false (nova path), true or <url>
      */
-    'redirect_back'     => true,
+    'redirect_back' => true,
     /*
      * Redirect path
      */
-    'redirect_to'       => '/',
+    'redirect_to' => '/',
     /*
      * Set true to record impersonation actions in Nova's action_events table
      * Attach the `Laravel\Nova\Actions\Actionable` trait to the `User` Eloquent model
@@ -38,15 +38,15 @@ return [
     /*
      * Bind on key press to impersonate user in details page
      */
-    'key_down'          => 'i',
+    'key_down' => 'i',
     /*
      * Middleware used for nova-impersonate routes
      */
-    'middleware'        => [
+    'middleware' => [
         /*
          * Middleware used for nova-impersonate routes
          */
-        'base'  => 'web',
+        'base' => 'web',
         /*
          * Extra middleware used for leave route
          */
@@ -55,7 +55,7 @@ return [
     /*
      * Leave impersonate before impersonating a user
      */
-    'leave_before_impersonate'       => false,
+    'leave_before_impersonate' => false,
     /*
      * Use a custom impersonation manager instead of the default 404labfr impersonate package.
      * E.g. \App\Services\ImpersonateService - implement Contracts\Impersonate.
