@@ -7,7 +7,7 @@
     ],
     "license": "MIT",
     "require": {
-        "lab404/laravel-impersonate": "^1.7.3",
+        "lab404/laravel-impersonate": "^1.7.7",
         "laravel/nova": "^4.0|^5.0"
     },
     "autoload": {
